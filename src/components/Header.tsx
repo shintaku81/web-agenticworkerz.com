@@ -4,10 +4,10 @@ import Link from "next/link";
 import { Menu, X, Zap } from "lucide-react";
 
 const navLinks = [
-  { href: "#features", label: "特徴" },
-  { href: "#articles", label: "記事" },
-  { href: "#events", label: "イベント" },
-  { href: "#newsletter", label: "ニュースレター" },
+  { href: "/#features", label: "特徴" },
+  { href: "/articles", label: "記事" },
+  { href: "/events", label: "イベント" },
+  { href: "/#newsletter", label: "ニュースレター" },
 ];
 
 export default function Header() {

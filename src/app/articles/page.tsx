@@ -9,12 +9,13 @@ export const metadata = {
   description: "AIエージェント・自律開発・自動化ワークフローに関する記事",
 };
 
-export default function ArticlesPage({
+export default async function ArticlesPage({
   searchParams,
 }: {
-  searchParams: { category?: string };
+  searchParams: Promise<{ category?: string }>;
 }) {
-  const activeCategory = searchParams.category as Category | undefined;
+  const { category } = await searchParams;
+  const activeCategory = category as Category | undefined;
   const articles = activeCategory
     ? ARTICLES.filter((a) => a.category === activeCategory)
     : ARTICLES;
