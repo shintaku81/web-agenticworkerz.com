@@ -1,18 +1,56 @@
 "use client";
 import { useState } from "react";
-import { ArrowLeft, Send, CheckCircle2, Mail, MessageSquare } from "lucide-react";
+import {
+  ArrowLeft,
+  Send,
+  CheckCircle2,
+  Mail,
+  MessageSquare,
+  Loader2,
+  AlertCircle,
+} from "lucide-react";
 import Link from "next/link";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 
 export default function ContactPage() {
-  const [form, setForm] = useState({ name: "", email: "", subject: "", message: "" });
+  const [form, setForm] = useState({
+    name: "",
+    email: "",
+    subject: "",
+    message: "",
+  });
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // TODO: API route で送信処理（Resend 連携）
-    setSubmitted(true);
+    setLoading(true);
+    setError(null);
+
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      });
+
+      const data = (await res.json()) as { success?: boolean; error?: string };
+
+      if (!res.ok || !data.success) {
+        setError(
+          data.error ?? "送信に失敗しました。しばらく後でお試しください。"
+        );
+        return;
+      }
+
+      setSubmitted(true);
+    } catch {
+      setError("ネットワークエラーが発生しました。しばらく後でお試しください。");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -42,8 +80,12 @@ export default function ContactPage() {
             >
               <Mail size={16} className="text-brand-500" />
               <div>
-                <div className="text-xs font-medium text-slate-800 group-hover:text-brand-600">メール</div>
-                <div className="text-xs text-slate-400">info@agenticworkerz.com</div>
+                <div className="text-xs font-medium text-slate-800 group-hover:text-brand-600">
+                  メール
+                </div>
+                <div className="text-xs text-slate-400">
+                  info@agenticworkerz.com
+                </div>
               </div>
             </a>
             <a
@@ -52,7 +94,9 @@ export default function ContactPage() {
             >
               <MessageSquare size={16} className="text-accent-500" />
               <div>
-                <div className="text-xs font-medium text-slate-800 group-hover:text-brand-600">X (Twitter)</div>
+                <div className="text-xs font-medium text-slate-800 group-hover:text-brand-600">
+                  X (Twitter)
+                </div>
                 <div className="text-xs text-slate-400">@agenticworkerz</div>
               </div>
             </a>
@@ -62,8 +106,13 @@ export default function ContactPage() {
             <div className="flex flex-col items-center justify-center gap-3 py-12 text-center">
               <CheckCircle2 size={40} className="text-green-400" />
               <p className="font-medium text-slate-800">送信しました。</p>
-              <p className="text-sm text-slate-400">通常3営業日以内にご返信いたします。</p>
-              <Link href="/" className="mt-4 text-sm text-brand-500 hover:text-brand-600">
+              <p className="text-sm text-slate-400">
+                通常3営業日以内にご返信いたします。
+              </p>
+              <Link
+                href="/"
+                className="mt-4 text-sm text-brand-500 hover:text-brand-600"
+              >
                 トップに戻る
               </Link>
             </div>
@@ -91,7 +140,9 @@ export default function ContactPage() {
                     required
                     type="email"
                     value={form.email}
-                    onChange={(e) => setForm({ ...form, email: e.target.value })}
+                    onChange={(e) =>
+                      setForm({ ...form, email: e.target.value })
+                    }
                     className="w-full px-3 py-2.5 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-brand-200 focus:border-brand-300 transition-colors"
                     placeholder="you@example.com"
                   />
@@ -106,7 +157,9 @@ export default function ContactPage() {
                   required
                   type="text"
                   value={form.subject}
-                  onChange={(e) => setForm({ ...form, subject: e.target.value })}
+                  onChange={(e) =>
+                    setForm({ ...form, subject: e.target.value })
+                  }
                   className="w-full px-3 py-2.5 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-brand-200 focus:border-brand-300 transition-colors"
                   placeholder="記事掲載のご相談"
                 />
@@ -120,26 +173,50 @@ export default function ContactPage() {
                   required
                   rows={5}
                   value={form.message}
-                  onChange={(e) => setForm({ ...form, message: e.target.value })}
+                  onChange={(e) =>
+                    setForm({ ...form, message: e.target.value })
+                  }
                   className="w-full px-3 py-2.5 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-brand-200 focus:border-brand-300 transition-colors resize-none"
                   placeholder="お問い合わせ内容をご記入ください。"
                 />
               </div>
 
+              {error && (
+                <div className="flex items-center gap-2 text-red-500 text-sm bg-red-50 border border-red-100 rounded-xl px-4 py-3">
+                  <AlertCircle size={15} className="shrink-0" />
+                  {error}
+                </div>
+              )}
+
               <p className="text-xs text-slate-400">
                 送信することで
-                <Link href="/privacy" className="text-brand-500 hover:underline mx-1">プライバシーポリシー</Link>
+                <Link
+                  href="/privacy"
+                  className="text-brand-500 hover:underline mx-1"
+                >
+                  プライバシーポリシー
+                </Link>
                 および
-                <Link href="/terms" className="text-brand-500 hover:underline mx-1">利用規約</Link>
+                <Link
+                  href="/terms"
+                  className="text-brand-500 hover:underline mx-1"
+                >
+                  利用規約
+                </Link>
                 に同意したものとみなします。
               </p>
 
               <button
                 type="submit"
-                className="w-full inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-gradient-to-r from-brand-500 to-accent-500 text-white font-semibold text-sm shadow-md hover:shadow-brand-200 hover:scale-[1.01] transition-all duration-200"
+                disabled={loading}
+                className="w-full inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-gradient-to-r from-brand-500 to-accent-500 text-white font-semibold text-sm shadow-md hover:shadow-brand-200 hover:scale-[1.01] transition-all duration-200 disabled:opacity-60 disabled:cursor-not-allowed disabled:hover:scale-100"
               >
-                <Send size={15} />
-                送信する
+                {loading ? (
+                  <Loader2 size={15} className="animate-spin" />
+                ) : (
+                  <Send size={15} />
+                )}
+                {loading ? "送信中…" : "送信する"}
               </button>
             </form>
           )}
