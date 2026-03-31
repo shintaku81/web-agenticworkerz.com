@@ -1,7 +1,7 @@
 {
   "buildCommand": "npm run build",
   "framework": "nextjs",
-  "regions": ["nrt1"],
+  "regions": ["hnd1"],
   "headers": [
     {
       "source": "/(.*)",
