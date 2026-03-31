@@ -1,41 +1,10 @@
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
-import ArticleCard, { type Article } from "./ArticleCard";
-
-const SAMPLE_ARTICLES: Article[] = [
-  {
-    slug: "multi-agent-architecture",
-    title: "マルチエージェントアーキテクチャ設計：オーケストレーターとワーカーの分離",
-    excerpt:
-      "複数のAIエージェントが協調して動くシステムを設計する際の責務分離パターン。Aira・Kiki・Haruを例に実践的な設計手法を解説します。",
-    category: "アーキテクチャ",
-    readTime: 8,
-    date: "2026-03-28",
-    gradient: "from-brand-500 to-accent-500",
-  },
-  {
-    slug: "claude-code-autonomous-dev",
-    title: "Claude Code で実現する自律コーディング：Issue → PR を全自動で",
-    excerpt:
-      "GitHub Issue を受け取り、コードを書き、テストを走らせ、PR を作成するまでをClaude Codeが完全自律で行うワークフローの構築方法。",
-    category: "開発ワークフロー",
-    readTime: 12,
-    date: "2026-03-25",
-    gradient: "from-violet-500 to-brand-400",
-  },
-  {
-    slug: "supabase-ai-loop",
-    title: "Supabase × AI改善ループ：コンテンツパフォーマンスを自動最適化する",
-    excerpt:
-      "記事のCTR・滞在時間をSupabaseで収集し、低成果コンテンツをAIが検出してタイトル・CTAの改善案を自動生成するパイプラインの実装。",
-    category: "AI自動化",
-    readTime: 10,
-    date: "2026-03-20",
-    gradient: "from-accent-500 to-sky-400",
-  },
-];
+import { ArrowRight, Clock, Tag } from "lucide-react";
+import { ARTICLES } from "@/lib/articles";
 
 export default function Articles() {
+  const featured = ARTICLES.slice(0, 3);
+
   return (
     <section id="articles" className="py-24 px-4 sm:px-6">
       <div className="max-w-6xl mx-auto">
@@ -59,16 +28,41 @@ export default function Articles() {
 
         {/* Grid */}
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {SAMPLE_ARTICLES.map((article) => (
-            <ArticleCard key={article.slug} article={article} />
+          {featured.map((article) => (
+            <Link
+              key={article.slug}
+              href={`/articles/${article.slug}`}
+              className="group flex flex-col bg-white rounded-2xl border border-slate-100 shadow-sm hover:shadow-md hover:border-brand-100 transition-all duration-300 overflow-hidden"
+            >
+              <div className={`h-1.5 bg-gradient-to-r ${article.gradient}`} />
+              <div className="p-5 flex flex-col flex-1">
+                <div className="flex items-center gap-3 mb-3">
+                  <span className="inline-flex items-center gap-1 text-xs font-medium text-brand-600 bg-brand-50 px-2 py-0.5 rounded-full">
+                    <Tag size={10} />
+                    {article.category}
+                  </span>
+                  <span className="flex items-center gap-1 text-xs text-slate-400">
+                    <Clock size={10} />
+                    {article.readTime} min
+                  </span>
+                </div>
+                <h3 className="font-semibold text-slate-900 text-sm leading-snug mb-2 group-hover:text-brand-600 transition-colors line-clamp-2">
+                  {article.title}
+                </h3>
+                <p className="text-xs text-slate-500 leading-relaxed line-clamp-3 flex-1">
+                  {article.excerpt}
+                </p>
+                <div className="flex items-center justify-between mt-4 pt-3 border-t border-slate-50">
+                  <span className="text-xs text-slate-400">{article.date}</span>
+                  <ArrowRight size={14} className="text-slate-300 group-hover:text-brand-500 group-hover:translate-x-1 transition-all duration-200" />
+                </div>
+              </div>
+            </Link>
           ))}
         </div>
 
         <div className="mt-8 text-center sm:hidden">
-          <Link
-            href="/articles"
-            className="inline-flex items-center gap-1.5 text-sm font-medium text-brand-600"
-          >
+          <Link href="/articles" className="inline-flex items-center gap-1.5 text-sm font-medium text-brand-600">
             すべての記事を見る <ArrowRight size={14} />
           </Link>
         </div>

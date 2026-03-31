@@ -17,9 +17,9 @@ export default function Footer() {
 
         {/* Links */}
         <nav className="flex items-center gap-5 text-xs text-slate-500">
-          <Link href="#" className="hover:text-brand-600 transition-colors">プライバシー</Link>
-          <Link href="#" className="hover:text-brand-600 transition-colors">利用規約</Link>
-          <Link href="#" className="hover:text-brand-600 transition-colors">お問い合わせ</Link>
+          <Link href="/privacy" className="hover:text-brand-600 transition-colors">プライバシーポリシー</Link>
+          <Link href="/terms" className="hover:text-brand-600 transition-colors">利用規約</Link>
+          <Link href="/contact" className="hover:text-brand-600 transition-colors">お問い合わせ</Link>
         </nav>
 
         {/* Social */}
