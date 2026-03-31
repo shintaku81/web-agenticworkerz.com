@@ -42,24 +42,24 @@ export default function Header() {
         {/* Desktop nav */}
         <nav className="hidden md:flex items-center gap-6">
           {navLinks.map((l) => (
-            <Link
+            <a
               key={l.href}
               href={l.href}
               className="text-sm text-slate-600 hover:text-brand-600 transition-colors font-medium"
             >
               {l.label}
-            </Link>
+            </a>
           ))}
         </nav>
 
         {/* CTA */}
         <div className="hidden md:flex items-center gap-3">
-          <Link
+          <a
             href="#newsletter"
             className="text-sm px-4 py-2 rounded-full bg-gradient-to-r from-brand-500 to-accent-500 text-white font-medium shadow-md hover:shadow-brand-200 hover:scale-105 transition-all duration-200"
           >
             無料登録
-          </Link>
+          </a>
         </div>
 
         {/* Mobile menu toggle */}
@@ -76,22 +76,22 @@ export default function Header() {
       {open && (
         <div className="md:hidden glass border-t border-slate-100 px-4 pb-4 pt-2 flex flex-col gap-3">
           {navLinks.map((l) => (
-            <Link
+            <a
               key={l.href}
               href={l.href}
               className="text-sm text-slate-700 hover:text-brand-600 font-medium py-1"
               onClick={() => setOpen(false)}
             >
               {l.label}
-            </Link>
+            </a>
           ))}
-          <Link
+          <a
             href="#newsletter"
             className="text-sm text-center px-4 py-2 rounded-full bg-gradient-to-r from-brand-500 to-accent-500 text-white font-medium mt-1"
             onClick={() => setOpen(false)}
           >
             無料登録
-          </Link>
+          </a>
         </div>
       )}
     </header>
