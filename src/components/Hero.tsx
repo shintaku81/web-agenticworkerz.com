@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { ArrowRight, Sparkles, Terminal, GitBranch } from "lucide-react";
+import ParticleBackground from "./ParticleBackground";
 
 const badges = [
   { icon: Terminal, label: "Claude Code 活用" },
@@ -12,11 +13,11 @@ export default function Hero() {
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Background */}
       <div className="absolute inset-0 bg-hero-gradient" />
-      <div className="absolute inset-0 bg-grid-pattern bg-grid-sm opacity-100" />
+      <ParticleBackground />
 
       {/* Decorative blobs */}
-      <div className="absolute top-1/4 -left-32 w-96 h-96 rounded-full bg-brand-100/60 blur-3xl animate-pulse-slow" />
-      <div className="absolute bottom-1/4 -right-32 w-80 h-80 rounded-full bg-accent-100/60 blur-3xl animate-pulse-slow" />
+      <div className="absolute top-1/4 -left-32 w-96 h-96 rounded-full bg-brand-100/50 blur-3xl animate-pulse-slow pointer-events-none" />
+      <div className="absolute bottom-1/4 -right-32 w-80 h-80 rounded-full bg-accent-100/50 blur-3xl animate-pulse-slow pointer-events-none" />
 
       <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 pt-24 pb-16 text-center">
         {/* Badge row */}
