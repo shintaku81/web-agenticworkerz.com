@@ -1,2 +1,4 @@
 .claude-vp/
 .DS_Store
+.next/
+node_modules/
