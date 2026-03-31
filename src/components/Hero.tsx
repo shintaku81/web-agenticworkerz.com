@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { ArrowRight, Sparkles, Terminal, GitBranch } from "lucide-react";
-import ParticleBackground from "./ParticleBackground";
+import AgentSphere from "./AgentSphere";
 
 const badges = [
   { icon: Terminal, label: "Claude Code 活用" },
@@ -13,7 +13,7 @@ export default function Hero() {
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Background */}
       <div className="absolute inset-0 bg-hero-gradient" />
-      <ParticleBackground />
+      <AgentSphere />
 
       {/* Decorative blobs */}
       <div className="absolute top-1/4 -left-32 w-96 h-96 rounded-full bg-brand-100/50 blur-3xl animate-pulse-slow pointer-events-none" />
