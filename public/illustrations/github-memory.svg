@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400" fill="none">
+  <rect width="800" height="400" fill="url(#bg3)"/>
+  <defs>
+    <linearGradient id="bg3" x1="0" y1="400" x2="800" y2="0" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#0a0f1e"/>
+      <stop offset="100%" stop-color="#111827"/>
+    </linearGradient>
+    <filter id="gf"><feGaussianBlur stdDeviation="5"/></filter>
+    <marker id="arw" markerWidth="7" markerHeight="7" refX="5" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L7,3 z" fill="#6366f1"/>
+    </marker>
+    <marker id="arw2" markerWidth="7" markerHeight="7" refX="5" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L7,3 z" fill="#22d3ee"/>
+    </marker>
+  </defs>
+
+  <!-- Glow -->
+  <circle cx="200" cy="200" r="100" fill="#6366f1" opacity="0.05" filter="url(#gf)"/>
+  <circle cx="600" cy="200" r="100" fill="#22d3ee" opacity="0.05" filter="url(#gf)"/>
+
+  <!-- Left: Context Window (fading) -->
+  <rect x="40" y="80" width="240" height="240" rx="16" fill="#1e1b4b" stroke="#6366f1" stroke-width="1.5"/>
+  <text x="160" y="110" text-anchor="middle" font-family="monospace" font-size="11" fill="#818cf8" font-weight="bold">LLM Context Window</text>
+  <!-- Memory bars fading -->
+  <rect x="60" y="130" width="200" height="12" rx="4" fill="#6366f1" opacity="0.8"/>
+  <rect x="60" y="150" width="170" height="12" rx="4" fill="#6366f1" opacity="0.6"/>
+  <rect x="60" y="170" width="130" height="12" rx="4" fill="#6366f1" opacity="0.4"/>
+  <rect x="60" y="190" width="90" height="12" rx="4" fill="#6366f1" opacity="0.25"/>
+  <rect x="60" y="210" width="50" height="12" rx="4" fill="#6366f1" opacity="0.12"/>
+  <rect x="60" y="230" width="20" height="12" rx="4" fill="#6366f1" opacity="0.05"/>
+  <!-- Warning -->
+  <rect x="60" y="255" width="200" height="36" rx="8" fill="#312e81" stroke="#f59e0b" stroke-width="1"/>
+  <text x="160" y="271" text-anchor="middle" font-family="monospace" font-size="10" fill="#fbbf24">⚠ Context Reset!</text>
+  <text x="160" y="284" text-anchor="middle" font-family="monospace" font-size="9" fill="#f59e0b">以前の作業を忘れる...</text>
+
+  <!-- Arrow: Context → GitHub -->
+  <path d="M290,200 Q370,160 430,200" stroke="#6366f1" stroke-width="1.5" stroke-dasharray="5 3" marker-end="url(#arw)" fill="none"/>
+  <text x="360" y="152" text-anchor="middle" font-family="monospace" font-size="9" fill="#818cf8">外部化</text>
+
+  <!-- Right: GitHub Issues as External Memory -->
+  <rect x="440" y="60" width="310" height="280" rx="16" fill="#0c1a2e" stroke="#22d3ee" stroke-width="1.5"/>
+  <text x="595" y="92" text-anchor="middle" font-family="monospace" font-size="11" fill="#67e8f9" font-weight="bold">GitHub Issues = 外部記憶</text>
+
+  <!-- Issue cards -->
+  <rect x="460" y="108" width="270" height="44" rx="8" fill="#0f2035" stroke="#1e40af" stroke-width="1"/>
+  <text x="475" y="127" font-family="monospace" font-size="9" fill="#93c5fd">#42 · open</text>
+  <text x="475" y="142" font-family="monospace" font-size="10" fill="#e2e8f0">Airaのスキル登録機能を実装</text>
+
+  <rect x="460" y="160" width="270" height="44" rx="8" fill="#0f2035" stroke="#1e40af" stroke-width="1"/>
+  <text x="475" y="179" font-family="monospace" font-size="9" fill="#93c5fd">#41 · closed ✓</text>
+  <text x="475" y="194" font-family="monospace" font-size="10" fill="#94a3b8">KIKIのヘルスチェック修正</text>
+
+  <rect x="460" y="212" width="270" height="44" rx="8" fill="#0f2035" stroke="#1e40af" stroke-width="1"/>
+  <text x="475" y="231" font-family="monospace" font-size="9" fill="#93c5fd">#40 · closed ✓</text>
+  <text x="475" y="246" font-family="monospace" font-size="10" fill="#94a3b8">ダッシュボードWebSocket対応</text>
+
+  <!-- Context label at bottom -->
+  <text x="595" y="285" text-anchor="middle" font-family="monospace" font-size="9" fill="#06b6d4">全文脈・判断根拠・結果をIssueに記録</text>
+  <text x="595" y="300" text-anchor="middle" font-family="monospace" font-size="9" fill="#06b6d4">→ リセット後も続きから作業可能</text>
+  <text x="595" y="315" text-anchor="middle" font-family="monospace" font-size="9" fill="#22d3ee" opacity="0.7">∞ 永続記憶</text>
+
+  <!-- Arrow: GitHub → new session -->
+  <path d="M440,330 Q360,360 290,330" stroke="#22d3ee" stroke-width="1.5" stroke-dasharray="5 3" marker-end="url(#arw2)" fill="none"/>
+  <text x="365" y="375" text-anchor="middle" font-family="monospace" font-size="9" fill="#22d3ee">新セッションでも復元</text>
+
+  <text x="400" y="390" text-anchor="middle" font-family="monospace" font-size="9" fill="#6366f1" opacity="0.4">GitHub Issues as AI External Memory · AgenticWorkerz</text>
+</svg>

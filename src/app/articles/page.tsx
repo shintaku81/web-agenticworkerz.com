@@ -80,7 +80,17 @@ export default async function ArticlesPage({
                 href={`/articles/${article.slug}`}
                 className="group flex flex-col bg-white rounded-2xl border border-slate-100 shadow-sm hover:shadow-md hover:border-brand-100 transition-all duration-300 overflow-hidden"
               >
-                <div className={`h-1.5 bg-gradient-to-r ${article.gradient}`} />
+                {article.coverImage ? (
+                  <div className="overflow-hidden bg-slate-900" style={{ height: "140px" }}>
+                    <img
+                      src={article.coverImage}
+                      alt={article.title}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    />
+                  </div>
+                ) : (
+                  <div className={`h-1.5 bg-gradient-to-r ${article.gradient}`} />
+                )}
                 <div className="p-5 flex flex-col flex-1">
                   <div className="flex items-center gap-3 mb-3">
                     <span className="inline-flex items-center gap-1 text-xs font-medium text-brand-600 bg-brand-50 px-2 py-0.5 rounded-full">

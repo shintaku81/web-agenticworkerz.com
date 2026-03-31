@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400" fill="none">
+  <rect width="800" height="400" fill="url(#bg2)"/>
+  <defs>
+    <linearGradient id="bg2" x1="0" y1="0" x2="800" y2="400" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#0a0a1f"/>
+      <stop offset="100%" stop-color="#0d1b2a"/>
+    </linearGradient>
+    <filter id="blur2"><feGaussianBlur stdDeviation="6"/></filter>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#6366f1"/>
+    </marker>
+    <marker id="arrow2" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#22d3ee"/>
+    </marker>
+  </defs>
+
+  <!-- Background glow -->
+  <ellipse cx="400" cy="200" rx="250" ry="130" fill="#6366f1" opacity="0.06" filter="url(#blur2)"/>
+
+  <!-- Loop oval path (decorative) -->
+  <ellipse cx="400" cy="200" rx="240" ry="120" stroke="#6366f1" stroke-opacity="0.15" stroke-width="1" stroke-dasharray="6 4"/>
+
+  <!-- Nodes on loop -->
+  <!-- GitHub Issues (top-left) -->
+  <rect x="60" y="130" width="140" height="60" rx="12" fill="#1e1b4b" stroke="#6366f1" stroke-width="1.5"/>
+  <text x="130" y="155" text-anchor="middle" font-family="monospace" font-size="11" fill="#a5b4fc" font-weight="bold">GitHub Issues</text>
+  <text x="130" y="172" text-anchor="middle" font-family="monospace" font-size="9" fill="#6366f1">外部記憶 / タスクキュー</text>
+
+  <!-- Claude Code (top-right) -->
+  <rect x="600" y="130" width="140" height="60" rx="12" fill="#0c1a2e" stroke="#22d3ee" stroke-width="1.5"/>
+  <text x="670" y="155" text-anchor="middle" font-family="monospace" font-size="11" fill="#67e8f9" font-weight="bold">Claude Code</text>
+  <text x="670" y="172" text-anchor="middle" font-family="monospace" font-size="9" fill="#06b6d4">AI実装エンジン</text>
+
+  <!-- Git Push (bottom-right) -->
+  <rect x="560" y="280" width="140" height="55" rx="12" fill="#0c1a2e" stroke="#22d3ee" stroke-width="1.5"/>
+  <text x="630" y="305" text-anchor="middle" font-family="monospace" font-size="11" fill="#67e8f9" font-weight="bold">git commit</text>
+  <text x="630" y="320" text-anchor="middle" font-family="monospace" font-size="9" fill="#06b6d4">push → main</text>
+
+  <!-- Issue Closed (bottom-left) -->
+  <rect x="100" y="280" width="140" height="55" rx="12" fill="#1e1b4b" stroke="#6366f1" stroke-width="1.5"/>
+  <text x="170" y="305" text-anchor="middle" font-family="monospace" font-size="11" fill="#a5b4fc" font-weight="bold">Issue Close</text>
+  <text x="170" y="320" text-anchor="middle" font-family="monospace" font-size="9" fill="#6366f1">gh issue close #N</text>
+
+  <!-- Arrows connecting the loop -->
+  <!-- Issues → Claude Code (top) -->
+  <path d="M200,160 C320,120 480,120 600,160" stroke="#6366f1" stroke-width="1.5" marker-end="url(#arrow)" fill="none"/>
+  <text x="400" y="128" text-anchor="middle" font-family="monospace" font-size="9" fill="#818cf8">gh issue list → pick #N</text>
+
+  <!-- Claude Code → git push (right) -->
+  <path d="M670,190 C700,230 680,260 630,280" stroke="#22d3ee" stroke-width="1.5" marker-end="url(#arrow2)" fill="none"/>
+  <text x="715" y="240" text-anchor="middle" font-family="monospace" font-size="9" fill="#22d3ee">実装・テスト</text>
+
+  <!-- git push → Issue Close (bottom) -->
+  <path d="M560,307 C460,340 340,340 240,307" stroke="#22d3ee" stroke-width="1.5" marker-end="url(#arrow2)" fill="none"/>
+  <text x="400" y="352" text-anchor="middle" font-family="monospace" font-size="9" fill="#22d3ee">自動クローズ</text>
+
+  <!-- Issue Close → Issues (left) -->
+  <path d="M130,280 C110,240 110,210 130,190" stroke="#6366f1" stroke-width="1.5" marker-end="url(#arrow)" fill="none"/>
+  <text x="82" y="238" text-anchor="middle" font-family="monospace" font-size="9" fill="#818cf8" transform="rotate(-90,82,238)">次のIssueへ</text>
+
+  <!-- Center badge -->
+  <circle cx="400" cy="200" r="42" fill="#1e1b4b" stroke="#6366f1" stroke-width="2"/>
+  <text x="400" y="194" text-anchor="middle" font-family="monospace" font-size="10" fill="#a5b4fc" font-weight="bold">Wiggum</text>
+  <text x="400" y="207" text-anchor="middle" font-family="monospace" font-size="10" fill="#a5b4fc" font-weight="bold">Loop</text>
+  <text x="400" y="220" text-anchor="middle" font-family="monospace" font-size="9" fill="#6366f1">∞</text>
+
+  <!-- Stats -->
+  <text x="400" y="385" text-anchor="middle" font-family="monospace" font-size="10" fill="#6366f1" opacity="0.5">14 Issues / day · Claude Code autonomous development loop</text>
+</svg>

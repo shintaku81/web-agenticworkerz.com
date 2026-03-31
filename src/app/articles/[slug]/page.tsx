@@ -50,8 +50,19 @@ export default async function ArticlePage({
             <ArrowLeft size={14} /> 記事一覧に戻る
           </Link>
 
-          {/* Color bar */}
-          <div className={`h-1 rounded-full bg-gradient-to-r ${article.gradient} mb-8`} />
+          {/* Cover illustration */}
+          {article.coverImage ? (
+            <div className="rounded-2xl overflow-hidden mb-8 border border-slate-100 shadow-sm">
+              <img
+                src={article.coverImage}
+                alt={article.title}
+                className="w-full h-auto"
+                style={{ maxHeight: "320px", objectFit: "cover" }}
+              />
+            </div>
+          ) : (
+            <div className={`h-1 rounded-full bg-gradient-to-r ${article.gradient} mb-8`} />
+          )}
 
           {/* Meta */}
           <div className="flex flex-wrap items-center gap-3 mb-5">
