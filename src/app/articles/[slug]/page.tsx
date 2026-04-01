@@ -2,8 +2,10 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import { ArrowLeft, Clock, Tag, Calendar } from "lucide-react";
 import { ARTICLES, getArticleBySlug } from "@/lib/articles";
+import { highlightCodeBlocks } from "@/lib/highlight";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import CodeBlockEnhancer from "@/components/CodeBlock";
 import type { Metadata } from "next";
 
 export async function generateStaticParams() {
@@ -32,6 +34,8 @@ export default async function ArticlePage({
   const { slug } = await params;
   const article = getArticleBySlug(slug);
   if (!article) notFound();
+
+  const highlightedContent = await highlightCodeBlocks(article.content);
 
   const related = ARTICLES.filter(
     (a) => a.slug !== article.slug && a.category === article.category
@@ -106,14 +110,22 @@ export default async function ArticlePage({
             className="prose prose-slate prose-sm sm:prose-base max-w-none
               prose-headings:font-bold prose-headings:tracking-tight prose-headings:text-slate-900
               prose-h2:text-xl prose-h2:mt-10 prose-h2:mb-4
+              prose-h3:text-base prose-h3:mt-6 prose-h3:mb-3
               prose-p:text-slate-600 prose-p:leading-relaxed
               prose-a:text-brand-600 prose-a:no-underline hover:prose-a:underline
               prose-code:text-brand-700 prose-code:bg-brand-50 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-code:text-sm prose-code:font-mono
-              prose-pre:bg-slate-900 prose-pre:text-slate-100 prose-pre:rounded-xl prose-pre:shadow-lg
+              prose-pre:p-0 prose-pre:bg-transparent prose-pre:shadow-none
+              [&_pre]:rounded-xl [&_pre]:overflow-auto [&_pre]:my-6
+              [&_pre_code]:bg-transparent [&_pre_code]:text-inherit [&_pre_code]:p-0 [&_pre_code]:rounded-none
               prose-ul:text-slate-600 prose-li:my-1
-              prose-strong:text-slate-800"
-            dangerouslySetInnerHTML={{ __html: article.content }}
+              prose-strong:text-slate-800
+              prose-table:text-sm prose-th:bg-slate-50 prose-th:text-slate-700
+              prose-td:text-slate-600"
+            dangerouslySetInnerHTML={{ __html: highlightedContent }}
           />
+
+          {/* Copy button injector (client) */}
+          <CodeBlockEnhancer />
 
           {/* Tags */}
           <div className="flex flex-wrap gap-2 mt-10 pt-8 border-t border-slate-100">
